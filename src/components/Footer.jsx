@@ -1,32 +1,64 @@
-function Footer() {
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+function Footer({ lang }) {
+  const text = {
+    en: {
+      title: "Visit Us Now",
+      contactInfo: "Contact Information",
+      location: "Location",
+      socials: "Socials",
+      facebook: "Facebook",
+      instagram: "Instagram",
+      rights: "© 2026 Officina Auto - All rights reserved",
+      privacy: "Privacy",
+      terms: "Terms & Conditions",
+      contacts: "Contacts",
+    },
+    es: {
+      title: "Visítanos Ahora",
+      contactInfo: "Información de Contacto",
+      location: "Ubicación",
+      socials: "Redes Sociales",
+      facebook: "Facebook",
+      instagram: "Instagram",
+      rights: "© 2026 Officina Auto - Todos los derechos reservados",
+      privacy: "Privacidad",
+      terms: "Términos y Condiciones",
+      contacts: "Contacto",
+    },
+  };
+
+  const t = text[lang] || text.en;
+
   return (
     <footer id="contatti" className="mt-24 bg-[#0b0f14] text-white">
       <div className="mx-auto max-w-[1400px] px-6 py-16">
         <h2 className="mb-14 mt-10 text-center text-4xl font-semibold md:text-5xl">
-          Visit Us Now
+          {t.title}
         </h2>
 
         <div className="grid gap-8 lg:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-6 text-center shadow-[0_8px_20px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all duration-300 hover:border-sky-800 hover:shadow-[0_14px_35px_rgba(0,0,0,0.55)]">
             <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-cyan-500 text-2xl text-black shadow-md">
               ☎
             </div>
 
             <p className="text-sm uppercase tracking-[0.2em] text-cyan-400">
-              Contact Information
+              {t.contactInfo}
             </p>
             <p className="mt-3 text-2xl font-semibold tracking-wide">
               0435 209 776
             </p>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-6 text-center shadow-[0_8px_20px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all duration-300 hover:border-sky-800 hover:shadow-[0_14px_35px_rgba(0,0,0,0.55)]">
             <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-cyan-500 text-2xl text-black shadow-md">
               📍
             </div>
 
             <p className="text-sm uppercase tracking-[0.2em] text-cyan-400">
-              Location
+              {t.location}
             </p>
             <p className="mt-3 text-lg leading-8 text-gray-200">
               1/147 Boniface St Archerfield
@@ -35,41 +67,51 @@ function Footer() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-transparent p-6">
-            <p className="text-sm uppercase tracking-[0.25em] text-cyan-400">
-              Officina Auto
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-6 text-center shadow-[0_8px_20px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all duration-300 hover:border-sky-800 hover:shadow-[0_14px_35px_rgba(0,0,0,0.55)]">
+            <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-cyan-500 text-2xl text-black shadow-md">
+              #
+            </div>
+
+            <p className="text-sm uppercase tracking-[0.2em] text-cyan-400">
+              {t.socials}
             </p>
 
-            <h3 className="mt-4 text-3xl font-semibold leading-tight">
-              Contattaci oggi per assistenza rapida e professionale
-            </h3>
+            <div className="mt-6 flex items-center justify-center gap-6">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 text-xl text-white transition-all duration-300 hover:border-sky-800 hover:bg-cyan-500 hover:text-black"
+              >
+                <FaFacebookF />
+              </a>
 
-            <p className="mt-4 text-base leading-7 text-gray-300">
-              Riparazioni, manutenzione e diagnosi complete per la tua auto, con
-              servizio affidabile e supporto diretto.
-            </p>
-
-            <a
-              href="tel:0435209776"
-              className="mt-8 inline-flex rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-black transition hover:bg-cyan-400"
-            >
-              Chiama ora
-            </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 text-xl text-white transition-all duration-300 hover:border-sky-800 hover:bg-cyan-500 hover:text-black"
+              >
+                <FaInstagram />
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-gray-400 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Officina Auto - Tutti i diritti riservati</p>
+        <div className="mt-14 flex flex-col items-center justify-center gap-4 border-t border-white/10 pt-6 text-center text-sm text-gray-400">
+          <p>{t.rights}</p>
 
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <a href="#" className="transition hover:text-cyan-400">
-              Privacy
-            </a>
-            <a href="#" className="transition hover:text-cyan-400">
-              Termini
-            </a>
-            <a href="#" className="transition hover:text-cyan-400">
-              Contatti
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            <Link to="/privacy" className="transition hover:text-cyan-400">
+              {t.privacy}
+            </Link>
+
+            <Link to="/terms" className="transition hover:text-cyan-400">
+              {t.terms}
+            </Link>
+
+            <a href="#contatti" className="transition hover:text-cyan-400">
+              {t.contacts}
             </a>
           </div>
         </div>

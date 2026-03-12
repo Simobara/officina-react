@@ -1,12 +1,14 @@
-import Hero from "./Body/Hero";
-import Services from "./Body/Services";
+import Hero from "../components/Body/Hero";
+import Map from "../components/Body/Map";
+import Services from "../components/Body/Services";
 
-function Body() {
+function Body({ lang }) {
   return (
-    <div className="space-y-52">
-      <Hero />
-      <Services />
-    </div>
+    <main>
+      <Hero lang={lang} />
+      <Services lang={lang} />
+      <Map lang={lang} />
+    </main>
   );
 }
 

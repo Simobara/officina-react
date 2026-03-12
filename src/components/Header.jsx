@@ -1,37 +1,130 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 
-function Header() {
+function Header({ lang, setLang }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const text = {
+    en: {
+      home: "Home",
+      services: "Services",
+      location: "Location",
+      contact: "Contact",
+    },
+    es: {
+      home: "Inicio",
+      services: "Servicios",
+      location: "Ubicación",
+      contact: "Contacto",
+    },
+  };
+
+  const navClass = `
+    relative px-5 py-2 text-[20px] font-semibold text-white 
+    transition duration-300
+    before:absolute before:left-1/2 before:top-0 before:h-[2px] before:w-0 
+    before:bg-sky-800 before:transition-all before:duration-300
+    after:absolute after:left-1/2 after:bottom-0 after:h-[2px] after:w-[0] 
+    after:bg-sky-800 after:transition-all after:duration-300
+    hover:before:left-0 hover:before:w-full
+    hover:after:left-0 hover:after:w-full
+  `;
+
+  const goToSection = (sectionId) => {
+    if (sectionId === "home") {
+      if (location.pathname !== "/") {
+        navigate("/");
+        return;
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const currentElement = document.getElementById(sectionId);
+
+    if (currentElement) {
+      currentElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      return;
+    }
+
+    navigate(`/#${sectionId}`);
+  };
+
   return (
-    <header className="bg-[#0c2d48] py-10">
-      <div className="mx-auto flex w-[90%] max-w-[1400px] items-center justify-between">
-        <a href="#home">
+    <header className="fixed top-0 left-0 z-50 w-full bg-[#0c2d48] shadow-lg">
+      <div className="mx-auto flex w-[90%] max-w-[1400px] items-center justify-between py-5">
+        <button
+          type="button"
+          onClick={() => goToSection("home")}
+          className="flex items-center gap-3"
+        >
           <img
             src={logo}
             alt="Officina Auto Logo"
-            className="h-[60px] w-auto object-contain"
+            className="h-[80px] w-[80px] object-contain transition duration-300 hover:scale-110"
           />
-        </a>
+        </button>
 
-        <nav className="flex gap-6">
-          <a
-            href="#home"
-            className="text-base text-white no-underline transition duration-300 hover:text-[#d8e6f2]"
+        <nav className="flex items-center gap-8">
+          <button
+            type="button"
+            onClick={() => goToSection("home")}
+            className={navClass}
           >
-            Home
-          </a>
-          <a
-            href="#servizi"
-            className="text-base text-white no-underline transition duration-300 hover:text-[#d8e6f2]"
+            {text[lang].home}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => goToSection("servizi")}
+            className={navClass}
           >
-            Servizi
-          </a>
-          <a
-            href="#contatti"
-            className="text-base text-white no-underline transition duration-300 hover:text-[#d8e6f2]"
+            {text[lang].services}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => goToSection("location")}
+            className={navClass}
           >
-            Contatti
-          </a>
+            {text[lang].location}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => goToSection("contatti")}
+            className={navClass}
+          >
+            {text[lang].contact}
+          </button>
         </nav>
+
+        <div className="flex gap-3 text-2xl">
+          <button
+            type="button"
+            onClick={() => setLang("en")}
+            className={`transition hover:scale-125 ${
+              lang === "en" ? "opacity-100" : "opacity-50"
+            }`}
+          >
+            🇬🇧
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setLang("es")}
+            className={`transition hover:scale-125 ${
+              lang === "es" ? "opacity-100" : "opacity-50"
+            }`}
+          >
+            🇪🇸
+          </button>
+        </div>
       </div>
     </header>
   );
