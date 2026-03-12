@@ -97,9 +97,7 @@ function Services({ lang }) {
           }
         });
       },
-      {
-        threshold: 0.2,
-      },
+      { threshold: 0.2 },
     );
 
     cardsRef.current.forEach((card) => {
@@ -110,79 +108,78 @@ function Services({ lang }) {
   }, []);
 
   return (
-    <section id="servizi" className="scroll-mt-24 bg-[#f2f2f2] pt-32 pb-40">
-      <div className="mx-auto max-w-[1400px] px-6">
-        <h2 className="mb-20 text-center text-5xl font-extrabold text-[#0c3b63] md:text-6xl">
+    <section
+      id="servizi"
+      className="scroll-mt-24 bg-[#f2f2f2] pt-20 pb-24 md:pt-32 md:pb-40"
+    >
+      <div className="mx-auto max-w-[1400px] px-5 md:px-6">
+        <h2 className="mb-14 text-center text-3xl font-extrabold text-[#0c3b63] md:mb-20 md:text-6xl">
           {t.title}
         </h2>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        {/* GRID MOBILE FIRST */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => (
             <div
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}
               data-index={index}
               className={`
-                group flex min-h-[260px] flex-col items-center justify-center
-                rounded-xl border border-black bg-[#e6e6e6] p-8 text-center
-                transition-all duration-700
-                hover:-translate-y-2
-                hover:bg-blue-600
-                hover:shadow-[0_14px_35px_rgba(0,0,0,0.6)]
-                hover:border-sky-800
+              group flex min-h-[200px] flex-col items-center justify-center
+              rounded-xl border border-black bg-[#e6e6e6]
+              p-6 text-center transition-all duration-300
+              hover:-translate-y-2 hover:bg-blue-600
+              hover:shadow-[0_14px_35px_rgba(0,0,0,0.6)]
+              hover:border-sky-800
 
-                ${
-                  visibleCards.includes(index)
-                    ? "translate-y-0 scale-100 opacity-100"
-                    : "translate-y-14 scale-95 opacity-0"
-                }
-              `}
-              style={{
-                transitionDelay: `${index * 100}ms`,
-              }}
+              ${
+                visibleCards.includes(index)
+                  ? "translate-y-0 scale-100 opacity-100"
+                  : "translate-y-10 scale-95 opacity-0"
+              }
+            `}
+              style={
+                !visibleCards.includes(index)
+                  ? { transitionDelay: `${index * 100}ms` }
+                  : {}
+              }
             >
-              <div className="mb-6 flex h-40 w-40 items-center justify-center overflow-hidden rounded-xl">
+              <div className="mb-4 flex h-24 w-24 items-center justify-center overflow-hidden rounded-xl md:h-36 md:w-36">
                 <img
                   src={service.icon}
                   alt={service.name}
-                  className="h-40 w-40 object-contain transition-all duration-500 group-hover:scale-110 group-hover:brightness-0 group-hover:invert"
+                  className="h-24 w-24 object-contain transition-all duration-500 group-hover:scale-110 group-hover:brightness-0 group-hover:invert md:h-36 md:w-36"
                 />
               </div>
 
-              <h3 className="max-w-[260px] text-xl font-extrabold text-[#0c3b63] transition-colors duration-300 group-hover:text-[#f5f5dc] md:text-2xl">
+              <h3 className="max-w-[240px] text-lg font-bold text-[#0c3b63] transition-colors duration-300 group-hover:text-[#f5f5dc] md:text-2xl">
                 {service.name}
               </h3>
 
-              <span className="mt-6 text-3xl font-light text-[#0f7ac7] transition-colors duration-300 group-hover:text-white">
+              <span className="mt-4 text-2xl text-[#0f7ac7] transition-colors duration-300 group-hover:text-white">
                 →
               </span>
             </div>
           ))}
         </div>
 
-        <div
-          className="
-            mx-auto mt-24 max-w-[900px]
-            rounded-3xl border border-black px-8 py-12 text-center
-            shadow-none transition-all duration-300
-            hover:shadow-[0_14px_35px_rgba(2,132,199,0.7)]
-          "
-        >
-          <p className="text-sm uppercase tracking-[0.25em] text-sky-800">
+        {/* CTA */}
+        <div className="mx-auto mt-16 max-w-[900px] rounded-3xl border border-black px-6 py-10 text-center transition-all duration-300 hover:shadow-[0_14px_35px_rgba(2,132,199,0.7)] md:mt-24 md:px-10 md:py-14">
+          <p className="text-xs uppercase tracking-[0.25em] text-sky-800 md:text-sm">
             {t.brand}
           </p>
 
-          <h3 className="mt-4 text-3xl font-extrabold leading-tight text-[#0c3b63] md:text-4xl">
+          <h3 className="mt-3 text-2xl font-extrabold leading-tight text-[#0c3b63] md:mt-4 md:text-4xl">
             {t.ctaTitle}
           </h3>
 
-          <p className="mx-auto mt-5 max-w-[720px] text-lg leading-8 text-gray-700">
+          <p className="mx-auto mt-4 max-w-[720px] text-base leading-7 text-gray-700 md:mt-5 md:text-lg md:leading-8">
             {t.ctaText}
           </p>
 
           <a
             href="tel:0435209776"
-            className="mt-8 inline-flex rounded-xl border border-black bg-sky-800 px-8 py-4 text-lg font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#0c3b63]"
+            className="mt-6 inline-flex rounded-xl border border-black bg-sky-800 px-6 py-3 text-base font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#0c3b63] md:mt-8 md:px-8 md:py-4 md:text-lg"
           >
             {t.callNow}
           </a>

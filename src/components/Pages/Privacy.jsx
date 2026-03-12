@@ -1,6 +1,6 @@
 function SectionTitle({ children }) {
   return (
-    <h2 className="mb-4 mt-10 text-2xl font-semibold text-white md:text-3xl">
+    <h2 className="mb-3 mt-8 text-xl font-semibold text-white sm:text-2xl md:mb-4 md:mt-10 md:text-3xl">
       {children}
     </h2>
   );
@@ -219,19 +219,32 @@ function Privacy({ lang }) {
   const t = text[lang] || text.en;
 
   return (
-    <div className="min-h-screen bg-[#111] px-6 py-16 text-white">
-      <div className="mx-auto max-w-5xl rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-sm md:p-12">
-        <h1 className="mb-4 text-4xl font-bold md:text-5xl">{t.title}</h1>
-        <p className="mb-8 text-sm text-cyan-400">{t.effective}</p>
+    <div className="min-h-screen bg-[#111] px-4 py-10 text-white sm:px-5 md:px-6 md:py-16">
+      <div className="mx-auto max-w-5xl rounded-2xl border border-white/10 bg-white/5 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-sm sm:p-6 md:rounded-3xl md:p-12">
+        <h1 className="mb-3 text-3xl font-bold leading-tight sm:text-4xl md:mb-4 md:text-5xl">
+          {t.title}
+        </h1>
+
+        <p className="mb-6 text-xs text-cyan-400 sm:text-sm md:mb-8">
+          {t.effective}
+        </p>
 
         <SectionTitle>{t.introTitle}</SectionTitle>
-        <p className="mb-4 leading-8 text-gray-300">{t.intro1}</p>
-        <p className="mb-4 leading-8 text-gray-300">{t.intro2}</p>
-        <p className="leading-8 text-gray-300">{t.intro3}</p>
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.intro1}
+        </p>
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.intro2}
+        </p>
+        <p className="text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.intro3}
+        </p>
 
         <SectionTitle>{t.section1}</SectionTitle>
-        <p className="mb-4 leading-8 text-gray-300">{t.section1p1}</p>
-        <ul className="space-y-3 pl-6 text-gray-300 marker:text-cyan-400 list-disc">
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section1p1}
+        </p>
+        <ul className="list-disc space-y-2 pl-5 text-sm text-gray-300 marker:text-cyan-400 sm:pl-6 sm:text-base md:space-y-3">
           <li>{t.s1a}</li>
           <li>{t.s1b}</li>
           <li>{t.s1c}</li>
@@ -243,13 +256,21 @@ function Privacy({ lang }) {
         </ul>
 
         <SectionTitle>{t.section2}</SectionTitle>
-        <p className="mb-4 leading-8 text-gray-300">{t.section2p1}</p>
-        <p className="mb-4 leading-8 text-gray-300">{t.section2p2}</p>
-        <p className="leading-8 text-gray-300">{t.section2p3}</p>
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section2p1}
+        </p>
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section2p2}
+        </p>
+        <p className="text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section2p3}
+        </p>
 
         <SectionTitle>{t.section3}</SectionTitle>
-        <p className="mb-4 leading-8 text-gray-300">{t.section3p1}</p>
-        <ul className="space-y-3 pl-6 text-gray-300 marker:text-cyan-400 list-disc">
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section3p1}
+        </p>
+        <ul className="list-disc space-y-2 pl-5 text-sm text-gray-300 marker:text-cyan-400 sm:pl-6 sm:text-base md:space-y-3">
           <li>{t.s3a}</li>
           <li>{t.s3b}</li>
           <li>{t.s3c}</li>
@@ -260,24 +281,36 @@ function Privacy({ lang }) {
         </ul>
 
         <SectionTitle>{t.section4}</SectionTitle>
-        <p className="mb-4 leading-8 text-gray-300">{t.section4p1}</p>
-        <ul className="space-y-3 pl-6 text-gray-300 marker:text-cyan-400 list-disc">
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section4p1}
+        </p>
+        <ul className="list-disc space-y-2 pl-5 text-sm text-gray-300 marker:text-cyan-400 sm:pl-6 sm:text-base md:space-y-3">
           <li>{t.s4a}</li>
           <li>{t.s4b}</li>
           <li>{t.s4c}</li>
           <li>{t.s4d}</li>
           <li>{t.s4e}</li>
         </ul>
-        <p className="mt-4 leading-8 text-gray-300">{t.section4p2}</p>
+        <p className="mt-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section4p2}
+        </p>
 
         <SectionTitle>{t.section5}</SectionTitle>
-        <p className="mb-4 leading-8 text-gray-300">{t.section5p1}</p>
-        <p className="mb-4 leading-8 text-gray-300">{t.section5p2}</p>
-        <p className="leading-8 text-gray-300">{t.section5p3}</p>
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section5p1}
+        </p>
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section5p2}
+        </p>
+        <p className="text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section5p3}
+        </p>
 
         <SectionTitle>{t.section6}</SectionTitle>
-        <p className="mb-4 leading-8 text-gray-300">{t.section6p1}</p>
-        <ul className="space-y-3 pl-6 text-gray-300 marker:text-cyan-400 list-disc">
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section6p1}
+        </p>
+        <ul className="list-disc space-y-2 pl-5 text-sm text-gray-300 marker:text-cyan-400 sm:pl-6 sm:text-base md:space-y-3">
           <li>{t.s6a}</li>
           <li>{t.s6b}</li>
           <li>{t.s6c}</li>
@@ -285,38 +318,56 @@ function Privacy({ lang }) {
           <li>{t.s6e}</li>
           <li>{t.s6f}</li>
         </ul>
-        <p className="mt-4 leading-8 text-gray-300">{t.section6p2}</p>
+        <p className="mt-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section6p2}
+        </p>
 
         <SectionTitle>{t.section7}</SectionTitle>
-        <p className="mb-4 leading-8 text-gray-300">{t.section7p1}</p>
-        <p className="mb-4 leading-8 text-gray-300">{t.section7p2}</p>
-        <p className="leading-8 text-gray-300">{t.section7p3}</p>
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section7p1}
+        </p>
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section7p2}
+        </p>
+        <p className="text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section7p3}
+        </p>
 
         <SectionTitle>{t.section8}</SectionTitle>
-        <p className="mb-4 leading-8 text-gray-300">{t.section8p1}</p>
-        <p className="leading-8 text-gray-300">{t.section8p2}</p>
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section8p1}
+        </p>
+        <p className="text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section8p2}
+        </p>
 
         <SectionTitle>{t.section9}</SectionTitle>
-        <p className="mb-4 leading-8 text-gray-300">{t.section9p1}</p>
-        <p className="leading-8 text-gray-300">{t.section9p2}</p>
+        <p className="mb-4 text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section9p1}
+        </p>
+        <p className="text-sm leading-7 text-gray-300 sm:text-base md:leading-8">
+          {t.section9p2}
+        </p>
 
         <SectionTitle>{t.section10}</SectionTitle>
-        <p className="mb-6 leading-8 text-gray-300">{t.section10p1}</p>
+        <p className="mb-5 text-sm leading-7 text-gray-300 sm:text-base md:mb-6 md:leading-8">
+          {t.section10p1}
+        </p>
 
-        <div className="rounded-2xl border border-white/10 bg-black/20 p-6 text-gray-300">
-          <p className="mb-2">
+        <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-gray-300 sm:p-5 sm:text-base md:p-6">
+          <p className="mb-3 leading-7">
             <span className="font-semibold text-white">{t.business}</span>{" "}
             Emmanuel Auto Service
           </p>
-          <p className="mb-2">
+          <p className="mb-3 leading-7">
             <span className="font-semibold text-white">{t.phone}</span> 0435 209
             776
           </p>
-          <p className="mb-2">
+          <p className="mb-3 leading-7">
             <span className="font-semibold text-white">{t.address}</span> 1/147
             Boniface St Archerfield, 4108, Brisbane, QLD, Australia
           </p>
-          <p>
+          <p className="leading-7 break-words">
             <span className="font-semibold text-white">{t.email}</span>{" "}
             {t.emailValue}
           </p>
