@@ -83,7 +83,7 @@ function Footer({ lang }) {
 
             <div className="mt-5 flex items-center justify-center gap-4 md:mt-6 md:gap-6">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/p/Emmanuel-Auto-Service-100063968532651/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-lg text-white transition-all duration-300 hover:border-sky-800 hover:bg-cyan-500 hover:text-black md:h-14 md:w-14 md:text-xl"
