@@ -32,9 +32,12 @@ function Footer({ lang }) {
   const t = text[lang] || text.en;
 
   return (
-    <footer id="contatti" className="mt-16 bg-[#0b0f14] text-white md:mt-24">
-      <div className="mx-auto max-w-[1400px] px-4 py-12 md:px-6 md:py-16">
-        <h2 className="mb-10 mt-4 text-center text-3xl font-semibold md:mb-14 md:mt-10 md:text-5xl">
+    <footer
+      id="contatti"
+      className="mt-16 scroll-mt-28 bg-[#0b0f14] text-white md:mt-24"
+    >
+      <div className="mx-auto max-w-[1400px] px-4 py-12 md:px-6 md:py-40">
+        <h2 className="mb-10 mt-4 text-center text-3xl font-semibold md:mb-40 md:mt-5 md:text-5xl">
           {t.title}
         </h2>
 
@@ -104,8 +107,7 @@ function Footer({ lang }) {
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 border-t border-white/10 pt-6 text-center text-xs text-gray-400 md:mt-14 md:text-sm">
           <p className="leading-6">{t.rights}</p>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-x-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 md:gap-x-4">
             <Link to="/privacy" className="transition hover:text-cyan-400">
               {t.privacy}
             </Link>
@@ -117,7 +119,20 @@ function Footer({ lang }) {
             <a href="#contatti" className="transition hover:text-cyan-400">
               {t.contacts}
             </a>
-          </div>
+          </div>{" "}
+          <p className="mt-2 text-[11px] text-gray-200 md:text-xs">
+            {" "}
+            Website developed by{" "}
+            <a
+              href="https://simobaraofficial.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-cyan-400 transition hover:text-white"
+            >
+              {" "}
+              Simobara{" "}
+            </a>{" "}
+          </p>
         </div>
       </div>
     </footer>

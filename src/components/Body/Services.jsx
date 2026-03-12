@@ -14,6 +14,7 @@ import tagliando from "../../assets/tagliando.png";
 
 function Services({ lang }) {
   const [visibleCards, setVisibleCards] = useState([]);
+  const [columns, setColumns] = useState(1);
   const cardsRef = useRef([]);
 
   const text = {
@@ -86,18 +87,48 @@ function Services({ lang }) {
   const t = text[lang];
 
   useEffect(() => {
+    const updateColumns = () => {
+      if (window.innerWidth >= 1024) {
+        setColumns(4);
+      } else if (window.innerWidth >= 640) {
+        setColumns(2);
+      } else {
+        setColumns(1);
+      }
+    };
+
+    updateColumns();
+    window.addEventListener("resize", updateColumns);
+
+    return () => window.removeEventListener("resize", updateColumns);
+  }, []);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 640;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
           const index = Number(entry.target.dataset.index);
-          if (entry.isIntersecting) {
-            setVisibleCards((prev) =>
-              prev.includes(index) ? prev : [...prev, index],
-            );
-          }
+
+          setVisibleCards((prev) =>
+            prev.includes(index) ? prev : [...prev, index],
+          );
+
+          observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.2 },
+      isMobile
+        ? {
+            threshold: 0.35,
+            rootMargin: "0px 0px -80px 0px",
+          }
+        : {
+            threshold: 0.18,
+            rootMargin: "0px 0px -40px 0px",
+          },
     );
 
     cardsRef.current.forEach((card) => {
@@ -106,6 +137,34 @@ function Services({ lang }) {
 
     return () => observer.disconnect();
   }, []);
+
+  const getDelay = (index) => {
+    if (columns === 1) {
+      return "0ms"; // mobile resta uguale
+    }
+
+    const row = Math.floor(index / columns);
+    const col = index % columns;
+
+    const rowDelay = row * 600; // ritardo tra le righe
+    const colDelay = col * 220; // una card alla volta nella stessa riga
+
+    return `${rowDelay + colDelay}ms`;
+  };
+
+  const getCardTransform = (index) => {
+    const isVisibleCard = visibleCards.includes(index);
+
+    if (isVisibleCard) {
+      return "perspective(1400px) translateX(0px) rotateY(0deg) rotateX(0deg) scale(1)";
+    }
+
+    if (columns === 1) {
+      return "translateX(-16px) scale(0.97)";
+    }
+
+    return "perspective(1400px) translateX(-70px) rotateY(18deg) rotateX(8deg) scale(0.95)";
+  };
 
   return (
     <section
@@ -117,54 +176,49 @@ function Services({ lang }) {
           {t.title}
         </h2>
 
-        {/* GRID MOBILE FIRST */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 [perspective:1400px]">
           {services.map((service, index) => (
             <div
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}
               data-index={index}
-              className={`
-              group flex min-h-[200px] flex-col items-center justify-center
-              rounded-xl border border-black bg-[#e6e6e6]
-              p-6 text-center transition-all duration-300
-              hover:-translate-y-2 hover:bg-blue-600
-              hover:shadow-[0_14px_35px_rgba(0,0,0,0.6)]
-              hover:border-sky-800
-
-              ${
-                visibleCards.includes(index)
-                  ? "translate-y-0 scale-100 opacity-100"
-                  : "translate-y-10 scale-95 opacity-0"
-              }
-            `}
-              style={
-                !visibleCards.includes(index)
-                  ? { transitionDelay: `${index * 100}ms` }
-                  : {}
-              }
+              className="
+                group flex min-h-[200px] flex-col items-center justify-center
+                rounded-xl border border-black bg-[#e6e6e6]
+                p-6 text-center shadow-[0_12px_30px_rgba(0,0,0,0.45)]
+                transition-[opacity,transform] duration-[1200ms] ease-out
+                hover:-translate-y-2 hover:bg-blue-600
+                hover:border-sky-800 hover:shadow-[0_18px_45px_rgba(0,0,0,0.65)]
+              "
+              style={{
+                transformStyle: "preserve-3d",
+                transitionDelay: visibleCards.includes(index)
+                  ? getDelay(index)
+                  : "0ms",
+                transform: getCardTransform(index),
+                opacity: visibleCards.includes(index) ? 1 : 0,
+              }}
             >
               <div className="mb-4 flex h-24 w-24 items-center justify-center overflow-hidden rounded-xl md:h-36 md:w-36">
                 <img
                   src={service.icon}
                   alt={service.name}
-                  className="h-24 w-24 object-contain transition-all duration-500 group-hover:scale-110 group-hover:brightness-0 group-hover:invert md:h-36 md:w-36"
+                  className="h-24 w-24 object-contain transition-transform duration-200 group-hover:scale-110 group-hover:brightness-0 group-hover:invert md:h-36 md:w-36"
                 />
               </div>
 
-              <h3 className="max-w-[240px] text-lg font-bold text-[#0c3b63] transition-colors duration-300 group-hover:text-[#f5f5dc] md:text-2xl">
+              <h3 className="max-w-[240px] text-lg font-bold text-[#0c3b63] transition-colors duration-75 group-hover:text-[#f5f5dc] md:text-2xl">
                 {service.name}
               </h3>
 
-              <span className="mt-4 text-2xl text-[#0f7ac7] transition-colors duration-300 group-hover:text-white">
+              <span className="mt-4 text-2xl text-[#0f7ac7] transition-colors duration-75 group-hover:text-white">
                 →
               </span>
             </div>
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="mx-auto mt-16 max-w-[900px] rounded-3xl border border-black px-6 py-10 text-center transition-all duration-300 hover:shadow-[0_14px_35px_rgba(2,132,199,0.7)] md:mt-24 md:px-10 md:py-14">
+        <div className="mx-auto mt-16 max-w-[900px] rounded-3xl border border-black px-6 py-10 text-center transition-all duration-200 hover:shadow-[0_14px_35px_rgba(2,132,199,0.7)] md:mt-24 md:px-10 md:py-14">
           <p className="text-xs uppercase tracking-[0.25em] text-sky-800 md:text-sm">
             {t.brand}
           </p>
@@ -179,7 +233,7 @@ function Services({ lang }) {
 
           <a
             href="tel:0435209776"
-            className="mt-6 inline-flex rounded-xl border border-black bg-sky-800 px-6 py-3 text-base font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#0c3b63] md:mt-8 md:px-8 md:py-4 md:text-lg"
+            className="mt-6 inline-flex rounded-xl border border-black bg-sky-800 px-6 py-3 text-base font-semibold text-white transition-all duration-150 hover:-translate-y-1 hover:bg-[#0c3b63] md:mt-8 md:px-8 md:py-4 md:text-lg"
           >
             {t.callNow}
           </a>

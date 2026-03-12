@@ -1,9 +1,13 @@
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 
 function Header({ lang, setLang }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [activeSection, setActiveSection] = useState("home");
+  const manualScrollRef = useRef(false);
+  const manualScrollTimeoutRef = useRef(null);
 
   const text = {
     en: {
@@ -20,8 +24,61 @@ function Header({ lang, setLang }) {
     },
   };
 
-  const navClass = `
-    relative px-2 py-1 text-sm font-semibold text-white
+  useEffect(() => {
+    const sectionIds = ["home", "servizi", "location", "contatti"];
+
+    const updateActiveSection = () => {
+      if (manualScrollRef.current) return;
+
+      const headerOffset = 120;
+
+      if (window.scrollY < 80) {
+        setActiveSection("home");
+        return;
+      }
+
+      const scrollBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 10;
+
+      if (scrollBottom) {
+        setActiveSection("contatti");
+        return;
+      }
+
+      let currentSection = "home";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+
+        if (rect.top <= headerOffset && rect.bottom >= headerOffset) {
+          currentSection = id;
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    updateActiveSection();
+
+    window.addEventListener("scroll", updateActiveSection);
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+
+      if (manualScrollTimeoutRef.current) {
+        clearTimeout(manualScrollTimeoutRef.current);
+      }
+    };
+  }, [location.pathname]);
+
+  const getNavClass = (sectionId) => `
+    relative px-2 py-1 text-sm font-semibold
     transition duration-300
     before:absolute before:left-1/2 before:top-0 before:h-[2px] before:w-0
     before:bg-sky-800 before:transition-all before:duration-300
@@ -31,9 +88,21 @@ function Header({ lang, setLang }) {
     hover:after:left-0 hover:after:w-full
     sm:px-3 sm:py-1.5 sm:text-base
     md:px-5 md:py-2 md:text-[20px]
+    ${
+      activeSection === sectionId
+        ? "text-yellow-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.95)]"
+        : "text-white"
+    }
   `;
 
   const goToSection = (sectionId) => {
+    if (manualScrollTimeoutRef.current) {
+      clearTimeout(manualScrollTimeoutRef.current);
+    }
+
+    manualScrollRef.current = true;
+    setActiveSection(sectionId);
+
     if (sectionId === "home") {
       if (location.pathname !== "/") {
         navigate("/");
@@ -41,16 +110,33 @@ function Header({ lang, setLang }) {
       }
 
       window.scrollTo({ top: 0, behavior: "smooth" });
+
+      manualScrollTimeoutRef.current = setTimeout(() => {
+        manualScrollRef.current = false;
+        setActiveSection("home");
+      }, 900);
+
       return;
     }
 
     const currentElement = document.getElementById(sectionId);
 
     if (currentElement) {
-      currentElement.scrollIntoView({
+      const headerOffset = 110;
+      const elementPosition =
+        currentElement.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
         behavior: "smooth",
-        block: "start",
       });
+
+      manualScrollTimeoutRef.current = setTimeout(() => {
+        manualScrollRef.current = false;
+        setActiveSection(sectionId);
+      }, 900);
+
       return;
     }
 
@@ -76,7 +162,7 @@ function Header({ lang, setLang }) {
           <button
             type="button"
             onClick={() => goToSection("home")}
-            className={navClass}
+            className={getNavClass("home")}
           >
             {text[lang].home}
           </button>
@@ -84,7 +170,7 @@ function Header({ lang, setLang }) {
           <button
             type="button"
             onClick={() => goToSection("servizi")}
-            className={navClass}
+            className={getNavClass("servizi")}
           >
             {text[lang].services}
           </button>
@@ -92,7 +178,7 @@ function Header({ lang, setLang }) {
           <button
             type="button"
             onClick={() => goToSection("location")}
-            className={navClass}
+            className={getNavClass("location")}
           >
             {text[lang].location}
           </button>
@@ -100,13 +186,13 @@ function Header({ lang, setLang }) {
           <button
             type="button"
             onClick={() => goToSection("contatti")}
-            className={navClass}
+            className={getNavClass("contatti")}
           >
             {text[lang].contact}
           </button>
         </nav>
 
-        <div className="flex gap-2 text-xl sm:gap-3 sm:text-2xl">
+        <div className="flex gap-3 text-3xl sm:gap-4 sm:text-4xl">
           <button
             type="button"
             onClick={() => setLang("en")}
