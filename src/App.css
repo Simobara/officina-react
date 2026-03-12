@@ -1,0 +1,297 @@
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.header {
+  background-color: #1a1a1a;
+  padding: 20px 0;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 28px;
+  color: #ff3b3b;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav a {
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.nav a:hover {
+  color: #ff3b3b;
+}
+
+/* HERO */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+    url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-content {
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  color: #ddd;
+}
+
+.hero-btn {
+  background-color: #ff3b3b;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  background-color: #d92d2d;
+}
+
+/* FOOTER */
+.footer {
+  background-color: #1a1a1a;
+  padding: 30px 0;
+  text-align: center;
+  border-top: 1px solid #2a2a2a;
+}
+
+.footer p {
+  margin: 8px 0;
+  color: #ccc;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.header {
+  background-color: #0c2d48;
+  padding: 22px 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav a {
+  font-size: 16px;
+  color: white;
+  transition: 0.3s;
+}
+
+.nav a:hover {
+  color: #d8e6f2;
+}
+
+/* HERO */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-content {
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 52px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 720px;
+  margin: 0 auto 30px;
+  color: #e7e7e7;
+}
+
+.hero-btn {
+  background-color: #ff3b3b;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  background-color: #d92d2d;
+}
+
+/* SERVICES */
+.services-section {
+  background-color: #f2f2f2;
+  padding: 70px 0 90px;
+}
+
+.services-title {
+  text-align: center;
+  font-size: 64px;
+  font-weight: 800;
+  color: #0c3b63;
+  margin-bottom: 50px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 34px;
+}
+
+.service-card {
+  background-color: #e6e6e6;
+  min-height: 300px;
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+}
+
+.service-icon {
+  font-size: 68px;
+  margin-bottom: 28px;
+}
+
+.service-card h3 {
+  font-size: 25px;
+  line-height: 1.3;
+  font-weight: 800;
+  color: #0c3b63;
+  max-width: 260px;
+}
+
+.service-arrow {
+  margin-top: 28px;
+  font-size: 38px;
+  color: #0f7ac7;
+  font-weight: 300;
+}
+
+/* FOOTER */
+.footer {
+  background-color: #0c2d48;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.footer p {
+  margin: 8px 0;
+  color: #e7eef5;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services-title {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header-content {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero h2 {
+    font-size: 36px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-title {
+    font-size: 36px;
+  }
+
+  .service-card {
+    min-height: 240px;
+  }
+
+  .service-card h3 {
+    font-size: 22px;
+  }
+}
