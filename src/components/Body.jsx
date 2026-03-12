@@ -3,10 +3,10 @@ import Services from "./Body/Services";
 
 function Body() {
   return (
-    <main>
+    <div className="space-y-52">
       <Hero />
       <Services />
-    </main>
+    </div>
   );
 }
 
